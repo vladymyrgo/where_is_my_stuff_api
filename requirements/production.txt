@@ -1,0 +1,16 @@
+# Pro-tip: Try not to put anything here. There should be no dependency in
+#   production that isn't in development.
+-r common.txt
+
+# Static Files and Media Storage
+# -------------------------------------
+boto==2.43.0
+django-storages-redux==1.3.2
+
+# Caching
+# -------------------------------------
+hiredis==0.2.0
+
+# Logging
+# -------------------------------------
+newrelic==2.74.0.54

@@ -1,0 +1,3 @@
+[run]
+source = where_is_my_stuff/
+omit = '*tests*,*commands*,*migrations*,*admin*,*wsgi*'

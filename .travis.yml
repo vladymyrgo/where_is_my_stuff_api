@@ -1,0 +1,35 @@
+language: python
+sudo: false
+python:
+- 3.5.1
+
+addons:
+  postgresql: "9.4"
+
+cache:
+  directories:
+    - $HOME/.cache/pip
+    - $HOME/.pip-accel
+
+before_cache:
+  - rm -f $HOME/.cache/pip/log/debug.log
+
+install:
+  - pip install pip-accel
+  - pip-accel install -r requirements/development.txt
+  - npm install
+  - npm run webpack
+
+before_script:
+- export DATABASE_URL=postgres://postgres@localhost/where_is_my_stuff
+- psql -c "CREATE DATABASE where_is_my_stuff;" -U postgres
+- psql -c "CREATE EXTENSION postgis;" -U postgres -d where_is_my_stuff
+
+script:
+- flake8
+- py.test --cov -v --tb=native
+
+notifications:
+  email:
+    on_success: change  # [always|never|change]
+    on_failure: always  # [always|never|change]
